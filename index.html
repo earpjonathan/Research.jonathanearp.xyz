@@ -8,13 +8,13 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <canvas id="network-canvas"></canvas>
+    <canvas id="research-canvas"></canvas>
 
     <nav class="site-nav">
         <div class="nav-left">
@@ -30,11 +30,34 @@
     <main class="container">
         
         <header class="page-header fade-in">
-            <h1>Scientific<br>Inquiry</h1>
-            <p class="intro-text">
-                Explorations in physical science and engineering. <br>
-                Focusing on nanotechnology, device fabrication, and environmental sensing.
-            </p>
+            <div class="header-grid">
+                <div class="header-text">
+                    <h1>Scientific<br>Endeavors</h1>
+                    <p class="intro-text">
+                        Explorations in physical science and engineering. <br>
+                        Focusing on nanotechnology, device fabrication, and environmental sensing.
+                    </p>
+                </div>
+                
+                <div class="research-matrix">
+                    <div class="matrix-row">
+                        <span class="label">LOCATIONS</span>
+                        <span class="value">UPENN / LBNL</span>
+                    </div>
+                    <div class="matrix-row">
+                        <span class="label">FOCUS</span>
+                        <span class="value">NANO / ENVIRO</span>
+                    </div>
+                    <div class="matrix-row">
+                        <span class="label">STATUS</span>
+                        <span class="value">Looking for future opportunities</span>
+                    </div>
+                    <div class="matrix-row">
+                        <span class="label">PERIOD</span>
+                        <span class="value">2023 — 2024</span>
+                    </div>
+                </div>
+            </div>
         </header>
 
         <div class="divider fade-in"></div>
@@ -65,27 +88,27 @@
                 <div class="carousel-container" id="carousel-upenn">
                     <div class="carousel-track">
                         <div class="carousel-slide">
-                            <img src="assets\microfluid.jpeg" alt="Cleanroom Gowning" loading="lazy">
+                            <img src="assets/microfluid.jpeg" alt="Cleanroom Gowning" loading="lazy">
                             <div class="caption">
                                 <strong>Cleanroom Protocol:</strong> Preparing for ISO-5 environment entry.
                             </div>
                         </div>
                         <div class="carousel-slide">
-                            <img src="assets\QD.jpeg" alt="SEM Microscopy" loading="lazy">
+                            <img src="assets/QD.jpeg" alt="SEM Microscopy" loading="lazy">
                             <div class="caption">
                                 <strong>SEM Imaging:</strong> Characterizing gold nanoparticle distribution.
                             </div>
                         </div>
                         <div class="carousel-slide">
-                            <img src="assets\SEM.jpeg" alt="Wafer Processing" loading="lazy">
+                            <img src="assets/SEM.jpeg" alt="Wafer Processing" loading="lazy">
                             <div class="caption">
                                 <strong>Lithography:</strong> Silicon wafer processing and etching.
                             </div>
                         </div>
-                         <div class="carousel-slide">
-                            <img src="assets\spincast.jpeg" alt="Wafer Processing" loading="lazy">
+                        <div class="carousel-slide">
+                            <img src="assets/spincast.jpeg" alt="Wafer Processing" loading="lazy">
                             <div class="caption">
-                                <strong>Lithography:</strong> Silicon wafer processing and etching.
+                                <strong>Spin Casting:</strong> Applying photoresist to silicon wafers.
                             </div>
                         </div>
                     </div>
@@ -131,13 +154,13 @@
                         <div class="carousel-slide">
                             <img src="assets/research/lbnl-1.jpg" alt="Sensor Prototype" loading="lazy">
                             <div class="caption">
-                                <strong>Sensor Prototype:</strong> Custom microcontroller setup for CO2 logging.
+                                <strong>Sensor Prototype:</strong> Custom microcontroller setup.
                             </div>
                         </div>
                         <div class="carousel-slide">
                             <img src="assets/research/lbnl-2.jpg" alt="Data Analysis" loading="lazy">
                             <div class="caption">
-                                <strong>Data Viz:</strong> Python-generated correlation matrix of pollutants.
+                                <strong>Data Viz:</strong> Correlation matrix of pollutants.
                             </div>
                         </div>
                     </div>
@@ -161,6 +184,7 @@
         <p>&copy; 2025 Jonathan Earp</p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

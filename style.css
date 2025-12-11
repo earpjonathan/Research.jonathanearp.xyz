@@ -23,15 +23,15 @@ a:hover {
     opacity: 0.7;
 }
 
-/* --------- BACKGROUND INTERACTION --------- */
-#network-canvas {
+/* --------- 3D BACKGROUND --------- */
+#research-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Behind everything */
-    opacity: 0.6; /* Subtle */
+    z-index: -1; 
+    opacity: 0.8; /* Made slightly more visible */
 }
 
 /* --------- LAYOUT --------- */
@@ -53,9 +53,10 @@ a:hover {
     font-weight: 500;
     position: sticky;
     top: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     backdrop-filter: blur(10px);
     z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .nav-left {
@@ -82,27 +83,61 @@ a:hover {
     border-color: #fff;
 }
 
-/* --------- HEADER --------- */
+/* --------- HEADER GRID (NEW) --------- */
 .page-header {
     padding: 6rem 0 4rem;
 }
 
+.header-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Text takes more space, Matrix takes less */
+    gap: 4rem;
+    align-items: end; /* Aligns matrix to bottom of title */
+}
+
 h1 {
     font-family: 'Anton', sans-serif;
-    font-size: clamp(3rem, 8vw, 6rem);
+    font-size: clamp(3rem, 7vw, 6rem);
     text-transform: uppercase;
     line-height: 0.95;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     letter-spacing: 1px;
 }
 
 .intro-text {
     font-size: 1.1rem;
-    color: #aaa;
+    color: #bbb;
     max-width: 500px;
 }
 
-/* --------- PROJECTS & CAROUSEL LAYOUT --------- */
+/* --------- RESEARCH MATRIX (NEW) --------- */
+/* This fills the blank space with cool data */
+.research-matrix {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid #333;
+}
+
+.matrix-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #333;
+    font-family: 'JetBrains Mono', monospace; /* Tech font */
+    font-size: 0.85rem;
+}
+
+.matrix-row .label {
+    color: #666;
+    letter-spacing: 1px;
+}
+
+.matrix-row .value {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* --------- PROJECTS --------- */
 .divider {
     height: 1px;
     background: #222;
@@ -112,7 +147,6 @@ h1 {
 
 .project-item {
     display: grid;
-    /* Grid: Info on left, Carousel on right */
     grid-template-columns: 1fr 1fr; 
     gap: 4rem;
     align-items: start;
@@ -209,7 +243,6 @@ h1 {
 
 .carousel-slide img {
     width: 100%;
-    /* Keep all images same aspect ratio, e.g., 4:3 or 16:9 */
     aspect-ratio: 4 / 3; 
     object-fit: cover;
     display: block;
@@ -221,6 +254,7 @@ h1 {
     padding: 1rem;
     font-size: 0.85rem;
     border-top: 1px solid #222;
+    font-family: 'Inter', sans-serif;
 }
 
 .caption strong {
@@ -231,7 +265,7 @@ h1 {
 /* Carousel Buttons */
 .carousel-btn {
     position: absolute;
-    top: 40%; /* Center vertically relative to image */
+    top: 40%; 
     transform: translateY(-50%);
     background: rgba(0,0,0,0.5);
     border: 1px solid rgba(255,255,255,0.2);
@@ -256,10 +290,10 @@ h1 {
 .prev-btn { left: 10px; }
 .next-btn { right: 10px; }
 
-/* Indicators (Dots) */
+/* Indicators */
 .carousel-indicators {
     position: absolute;
-    bottom: 4.5rem; /* Above caption */
+    bottom: 4.5rem; 
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -290,15 +324,28 @@ h1 {
     transform: translateY(0);
 }
 
+/* --------- FOOTER --------- */
+.site-footer {
+    padding: 4rem 0;
+    text-align: center;
+    color: #444;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
 /* --------- RESPONSIVE --------- */
 @media (max-width: 900px) {
+    .header-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
     .project-item {
-        grid-template-columns: 1fr; /* Stack layout */
+        grid-template-columns: 1fr;
         gap: 2rem;
     }
     
     .carousel-wrapper {
-        order: -1; /* Put image above text on mobile? Remove this line if you prefer image below */
         margin-bottom: 1rem;
     }
 }

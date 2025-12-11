@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index === 0) dot.classList.add('active');
             dotsContainer.appendChild(dot);
             
-            // Dot Click
             dot.addEventListener('click', () => {
                 moveToSlide(index);
             });
@@ -48,119 +47,103 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================
-    // 2. INTERACTIVE BACKGROUND (PARTICLE NETWORK)
+    // 2. THREE.JS 3D BACKGROUND (THE APPARENT ELEMENT)
     // ==========================================
-    const canvas = document.getElementById('network-canvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let particles = [];
+    const canvas = document.getElementById('research-canvas');
+    const scene = new THREE.Scene();
 
-    // Settings
-    const particleCount = 60; // Adjust for density
-    const connectionDistance = 150;
-    const mouseDistance = 200;
+    // Camera
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 20;
+
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Objects (Crystalline Structures)
+    const geometry = new THREE.IcosahedronGeometry(0.5, 0); // Geometric shape
+    const material = new THREE.MeshBasicMaterial({ 
+        color: 0xffffff, 
+        wireframe: true,
+        transparent: true,
+        opacity: 0.3
+    });
+
+    const particles = [];
+    const particleCount = 100; // Visible amount of objects
+
+    for (let i = 0; i < particleCount; i++) {
+        const mesh = new THREE.Mesh(geometry, material);
+        
+        // Spread them out widely
+        mesh.position.x = (Math.random() - 0.5) * 60;
+        mesh.position.y = (Math.random() - 0.5) * 40;
+        mesh.position.z = (Math.random() - 0.5) * 30;
+
+        // Store original position for return logic
+        mesh.userData = {
+            originalX: mesh.position.x,
+            originalY: mesh.position.y,
+            speed: Math.random() * 0.01 + 0.005,
+            rotationSpeed: Math.random() * 0.02
+        };
+
+        scene.add(mesh);
+        particles.push(mesh);
+    }
+
+    // Mouse Tracking (Normalized)
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    document.addEventListener('mousemove', (event) => {
+        // Convert mouse to 3D space coordinates roughly
+        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    // Animation Loop
+    const tick = () => {
+        // Raycaster logic to push particles away slightly based on mouse
+        // Note: For performance/simplicity we map mouse directly to world space somewhat
+        const targetX = mouseX * 30; 
+        const targetY = mouseY * 20;
+
+        particles.forEach(mesh => {
+            // Rotate the shapes (Active looking)
+            mesh.rotation.x += mesh.userData.rotationSpeed;
+            mesh.rotation.y += mesh.userData.rotationSpeed;
+
+            // Repulsion Logic
+            const dx = mesh.position.x - targetX;
+            const dy = mesh.position.y - targetY;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+
+            if (dist < 8) {
+                // Push away
+                const force = (8 - dist) * 0.5;
+                mesh.position.x += (dx / dist) * force * 0.1;
+                mesh.position.y += (dy / dist) * force * 0.1;
+            } else {
+                // Return to original
+                mesh.position.x += (mesh.userData.originalX - mesh.position.x) * 0.02;
+                mesh.position.y += (mesh.userData.originalY - mesh.position.y) * 0.02;
+            }
+        });
+
+        renderer.render(scene, camera);
+        window.requestAnimationFrame(tick);
+    };
+
+    tick();
 
     // Resize
-    function resize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    // Mouse tracking
-    const mouse = { x: null, y: null };
-    window.addEventListener('mousemove', (e) => {
-        mouse.x = e.x;
-        mouse.y = e.y;
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
     });
-    window.addEventListener('mouseleave', () => {
-        mouse.x = null;
-        mouse.y = null;
-    });
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.5; // Slow movement
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.size = Math.random() * 2 + 1;
-        }
-
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-
-            // Bounce off edges
-            if (this.x < 0 || this.x > width) this.vx *= -1;
-            if (this.y < 0 || this.y > height) this.vy *= -1;
-
-            // Mouse Interaction (Repulsion)
-            if (mouse.x != null) {
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < mouseDistance) {
-                    const forceDirectionX = dx / distance;
-                    const forceDirectionY = dy / distance;
-                    const force = (mouseDistance - distance) / mouseDistance;
-                    const directionX = forceDirectionX * force * 2; // Strength
-                    const directionY = forceDirectionY * force * 2;
-
-                    this.vx -= directionX * 0.05;
-                    this.vy -= directionY * 0.05;
-                }
-            }
-        }
-
-        draw() {
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    function initParticles() {
-        particles = [];
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-    }
-    initParticles();
-
-    function animate() {
-        ctx.clearRect(0, 0, width, height);
-        
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-
-            // Draw connections
-            for (let j = i; j < particles.length; j++) {
-                let dx = particles[i].x - particles[j].x;
-                let dy = particles[i].y - particles[j].y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < connectionDistance) {
-                    ctx.beginPath();
-                    // Opacity based on distance
-                    let opacity = 1 - (distance / connectionDistance);
-                    ctx.strokeStyle = 'rgba(255, 255, 255,' + opacity * 0.15 + ')';
-                    ctx.lineWidth = 1;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
-            }
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
 
     // ==========================================
     // 3. SCROLL FADE IN
