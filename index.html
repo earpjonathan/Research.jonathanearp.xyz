@@ -1,197 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jonathan Earp | Research</title>
-    <meta name="description" content="Research Portfolio: Nanotechnology & Indoor Air Quality">
-    
+    <title>Jonathan Earp — Research</title>
+    <meta name="description" content="Research of Jonathan Earp — StoveCam, an AI vision sensor for indoor air-quality and cooking detection at Lawrence Berkeley National Lab, plus nanofabrication work.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
+
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          d.dataset.theme = localStorage.getItem("theme") || "dark";
+        } catch (e) { d.dataset.theme = "dark"; }
+      })();
+    </script>
 </head>
 <body>
 
-    <canvas id="research-canvas"></canvas>
+    <div class="vlabel" aria-hidden="true">StoveCam — LBNL</div>
 
-    <nav class="site-nav">
-        <div class="nav-left">
-            <a href="https://jonathanearp.xyz" class="home-link">Jonathan Earp</a>
-            <span class="slash">/</span>
-            <span class="page-title">Research</span>
+    <header class="topbar">
+        <div class="topbar__inner">
+            <a href="https://jonathanearp.xyz" class="brand">Jonathan Earp <span class="brand__crumb">Research</span></a>
+            <nav class="topnav">
+                <a href="#stovecam" class="topnav__link topnav__link--hide">StoveCam</a>
+                <a href="#archive" class="topnav__link topnav__link--hide">Archive</a>
+                <a href="https://jonathanearp.xyz" class="topnav__link topnav__link--hide">Index ↗</a>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme">
+                    <span class="theme-toggle__dot"></span><span class="theme-toggle__label"></span>
+                </button>
+            </nav>
         </div>
-        <div class="nav-right">
-            <a href="https://jonathanearp.xyz" class="back-btn">Back to Hub</a>
-        </div>
-    </nav>
+    </header>
 
-    <main class="container">
-        
-        <header class="page-header fade-in">
-            <div class="header-grid">
-                <div class="header-text">
-                    <h1>Scientific<br>Endeavors</h1>
-                    <p class="intro-text">
-                        Explorations in physical science and engineering. <br>
-                        Focusing on nanotechnology, device fabrication, and environmental sensing.
+    <main id="top">
+
+        <!-- HERO -->
+        <section class="hero wrap">
+            <canvas id="topo" data-topo data-interactive="true" aria-hidden="true"></canvas>
+            <div class="hero__eyebrow mono" data-reveal>
+                <span><span class="dot">●</span> Research / 2023—2026</span>
+                <span>Lawrence Berkeley National Lab</span>
+                <span>UPenn</span>
+            </div>
+            <h1 class="hero__title" data-reveal style="--i:1">Research</h1>
+            <p class="hero__lead" data-reveal style="--i:2">
+                I build <b>low-cost sensors</b> that turn everyday signals into real data,
+                and I spend just as much time finding out where they get it wrong.
+            </p>
+
+            <div class="metastrip" data-reveal style="--i:3">
+                <div class="metastrip__cell">
+                    <span class="metastrip__k">Focus</span>
+                    <span class="metastrip__v">AI Sensing / IAQ</span>
+                </div>
+                <div class="metastrip__cell">
+                    <span class="metastrip__k">Partners</span>
+                    <span class="metastrip__v">LBNL · UPenn</span>
+                </div>
+                <div class="metastrip__cell">
+                    <span class="metastrip__k">Status</span>
+                    <span class="metastrip__v">Active — ISES 2026</span>
+                </div>
+                <div class="metastrip__cell">
+                    <span class="metastrip__k">Output</span>
+                    <span class="metastrip__v">Sensor · dataset · paper</span>
+                </div>
+            </div>
+            <div class="scroll-prompt" aria-hidden="true"><span>Scroll to continue</span><span class="chev"></span></div>
+        </section>
+
+        <!-- FEATURE: STOVECAM -->
+        <section class="feature wrap" id="stovecam">
+            <div class="shead" data-reveal>
+                <span class="shead__no">01</span>
+                <span class="shead__title">Featured</span>
+                <span class="shead__meta">Lawrence Berkeley National Lab</span>
+            </div>
+
+            <div data-reveal>
+                <p class="feature__lede">An AI sensor that reads the stove.</p>
+                <h2 class="feature__big">StoveCam</h2>
+                <p class="feature__sub">
+                    A small camera that watches the stove and works out <em>when</em> someone's
+                    cooking, <em>what</em> is in the pan, and <em>how</em> it's being cooked. That
+                    record is exactly what air-quality researchers need, and it costs a tiny
+                    fraction of what proper lab instruments do.
+                </p>
+            </div>
+
+            <!-- stats -->
+            <div class="stats" data-reveal>
+                <div class="stat">
+                    <div class="stat__n">40k<small>+</small></div>
+                    <div class="stat__l">RGB + thermal pairs<br>across three homes</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__n">8.1<small>/10</small></div>
+                    <div class="stat__l">Mean human-graded<br>identification accuracy</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__n">$0.018</div>
+                    <div class="stat__l">AI cost per<br>analyzed pair</div>
+                </div>
+                <div class="stat">
+                    <div class="stat__n">3<small>-stage</small></div>
+                    <div class="stat__l">Pipeline that spends<br>AI where it counts</div>
+                </div>
+            </div>
+
+            <!-- 01 problem -->
+            <div class="block" data-reveal>
+                <div class="block__no">01</div>
+                <div class="block__body">
+                    <h3 class="block__h">The problem</h3>
+                    <p>
+                        Cooking is one of the biggest sources of indoor air pollution, and it's
+                        surprisingly hard to track. To model it, researchers need to know how often a
+                        home cooks, on which burner, how, and for how long. Asking people to write it
+                        down doesn't really work, and the lab-grade gear that measures it properly is
+                        way too expensive to put in a lot of homes. StoveCam started as a side question
+                        from our earlier <strong>air-quality work at LBNL</strong>:
+                        <strong>could a cheap camera and an AI model just figure the cooking out by
+                        watching?</strong>
                     </p>
                 </div>
-                
-                <div class="research-matrix">
-                    <div class="matrix-row">
-                        <span class="label">LOCATIONS</span>
-                        <span class="value">UPENN / LBNL</span>
+            </div>
+
+            <!-- 02 sensor -->
+            <div class="block" data-reveal>
+                <div class="block__no">02</div>
+                <div class="block__body">
+                    <h3 class="block__h">The sensor: two cameras, one stove</h3>
+                    <p>
+                        Each unit is a <strong>Raspberry Pi 5</strong> sitting above the stove with two
+                        cameras: a normal <strong>RGB camera</strong> and an <strong>Adafruit thermal
+                        camera</strong>. Every 60 seconds it takes a picture with both and saves the
+                        pair. The two cameras are doing different jobs on purpose. The normal photo shows
+                        what's on the stove. The thermal photo shows what the normal one can't — heat
+                        under a lid, a pan that's been left on, and the actual temperatures.
+                    </p>
+                    <div class="pair">
+                        <figure>
+                            <img src="assets/stovecam-2309-rgb.jpg" alt="RGB capture: French toast cooking in a skillet" loading="lazy">
+                            <figcaption><span class="ptag">RGB</span> French toast cooking in a stainless skillet — the model reads the cookware, the food, and the front-right burner.</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="assets/stovecam-2309-ir.jpg" alt="Thermal capture: hot pan with cooler toast" loading="lazy">
+                            <figcaption><span class="ptag ptag--ir">Thermal</span> The same instant in IR — the pan core reads 113.9&deg;C while the toast stays cooler where it absorbs heat.</figcaption>
+                        </figure>
                     </div>
-                    <div class="matrix-row">
-                        <span class="label">FOCUS</span>
-                        <span class="value">NANO / ENVIRO</span>
+                    <p class="aside">
+                        The most common thing the model saw across the whole dataset was a covered pot.
+                        Those are exactly the moments the thermal camera pulls its weight: you can't see
+                        the food, but you can still see the heat.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 03 pipeline -->
+            <div class="block" data-reveal>
+                <div class="block__no">03</div>
+                <div class="block__body">
+                    <h3 class="block__h">A three-stage pipeline</h3>
+                    <p>
+                        Running a top-end AI model on every photo would cost a fortune. So each capture
+                        goes through three steps, and only the photos that matter make it as far as the
+                        expensive one.
+                    </p>
+                    <div class="pipeline">
+                        <div class="stage">
+                            <div class="stage__n">Stage 1</div>
+                            <div class="stage__h">Brightness gate</div>
+                            <p class="stage__p">A quick check on the device itself throws out dark photos — lights off, nobody home — before any AI runs. This alone drops most of the captures.</p>
+                            <div class="stage__cost">$0 · on-device</div>
+                        </div>
+                        <div class="stage">
+                            <div class="stage__n">Stage 2</div>
+                            <div class="stage__h">Cooking screening</div>
+                            <p class="stage__p">A small vision model on LBNL's <strong>CBorg</strong> service answers one yes/no question: is anyone actually cooking?</p>
+                            <div class="stage__cost">cheap · cooking / not</div>
+                        </div>
+                        <div class="stage">
+                            <div class="stage__n">Stage 3</div>
+                            <div class="stage__h">Full identification</div>
+                            <p class="stage__p">Only the photos that pass step two reach the best model (Gemini), which writes down the food, how it's cooked, the cookware, the burner, and how sure it is.</p>
+                            <div class="stage__cost">premium · rich labels</div>
+                        </div>
                     </div>
-                    <div class="matrix-row">
-                        <span class="label">STATUS</span>
-                        <span class="value">Looking for future opportunities</span>
-                    </div>
-                    <div class="matrix-row">
-                        <span class="label">PERIOD</span>
-                        <span class="value">2023 — 2024</span>
+                    <p class="aside">
+                        Step three writes one record per cooking session, and more than one when
+                        several burners are going at once. It covers the method (<em>boil, simmer,
+                        sauté, pan-fry, deep-fry, bake, broil</em>), which burner, and the cookware.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 04 how -->
+            <div class="block" data-reveal>
+                <div class="block__no">04</div>
+                <div class="block__body">
+                    <h3 class="block__h">Why a vision model can read a stove</h3>
+                    <p>
+                        The model doesn't really "see" the way we do. It shrinks each photo, cuts it into
+                        small patches, and turns every patch into a list of numbers. Those numbers sit in
+                        the <em>same</em> space as words, so a round metal shape with a handle ends up
+                        near "skillet," and a bright ring in the thermal photo ends up near "hot burner."
+                        Because it was trained on huge piles of labelled food photos, overhead cooking
+                        clips <em>and</em> thermal images, it can even read the little temperature numbers
+                        printed on the IR frame.
+                    </p>
+                    <div class="callout">
+                        <strong>Where it falls down.</strong> The model is matching patterns, not
+                        understanding physics, so a strange scene it hasn't seen before can fool it. It's
+                        also biased toward Western food: it nails a plate of salmon or French toast where
+                        everything sits separately, but a wok full of mixed, blurry stir-fry is much
+                        harder. It gets chicken right nearly every time; jackfruit, almost never. Writing
+                        down <em>where</em> and <em>why</em> it fails is a real part of the project, not a
+                        footnote.
                     </div>
                 </div>
             </div>
-        </header>
 
-        <div class="divider fade-in"></div>
-
-        <section class="project-item fade-in">
-            <div class="project-info">
-                <div class="project-meta">
-                    <span class="year">2024</span>
-                    <span class="location">UPENN ESAP</span>
+            <!-- 05 validation -->
+            <div class="block" data-reveal>
+                <div class="block__no">05</div>
+                <div class="block__body">
+                    <h3 class="block__h">Checking the AI against people</h3>
+                    <p>
+                        To see whether the labels were any good, we went through <strong>506</strong>
+                        random photo pairs by hand, scored each out of 10, and noted what kind of mistakes
+                        turned up. The model averaged <strong>8.1/10</strong>, with <strong>66%</strong>
+                        scoring 8 or higher and <strong>32%</strong> we couldn't fault. When it does get
+                        it wrong, it usually thinks cooking is happening when it's really just leftover
+                        heat — and for an air-quality study, that's the safer way to be wrong.
+                    </p>
+                    <figure class="result">
+                        <img src="assets/stovecam-results.png" alt="Six-panel chart of StoveCam grading results across 506 graded pairs" loading="lazy">
+                        <figcaption>Grading dashboard across 506 human-scored pairs — rating distribution, error-flag frequency, model self-confidence vs. human score, and accuracy by cooking type and food.</figcaption>
+                    </figure>
                 </div>
-                <h2 class="project-title">Nanotechnology & Device Fabrication</h2>
-                <div class="tags">
-                    <span>Nanoscience</span>
-                    <span>Cleanroom ISO-5</span>
-                    <span>Lithography</span>
-                </div>
-                <p class="description">
-                    An intensive research fellowship focused on the fabrication and characterization of nanoscale devices. Worked within a Class 100 cleanroom environment to process silicon wafers using advanced lithography techniques.
-                </p>
-                <ul class="details-list">
-                    <li>Synthesized gold nanoparticles and analyzed optical properties using spectroscopy.</li>
-                    <li>Utilized Scanning Electron Microscopy (SEM) and Atomic Force Microscopy (AFM).</li>
-                    <li>Developed protocols for thin-film deposition at the atomic level.</li>
-                </ul>
             </div>
 
-            <div class="carousel-wrapper">
-                <div class="carousel-container" id="carousel-upenn">
-                    <div class="carousel-track">
-                        <div class="carousel-slide">
-                            <img src="assets/microfluid.jpeg" alt="Cleanroom Gowning" loading="lazy">
-                            <div class="caption">
-                                <strong>Cleanroom Protocol:</strong> Preparing for ISO-5 environment entry.
+            <!-- 06 worked examples -->
+            <div class="block" data-reveal>
+                <div class="block__no">06</div>
+                <div class="block__body">
+                    <h3 class="block__h">Worked examples</h3>
+                    <p>
+                        Two real captures that scored a perfect 10/10 when we graded them. Each one shows
+                        the two photos that went in and the record the model wrote out, including the notes
+                        it left for itself.
+                    </p>
+
+                    <div class="results">
+                        <article class="rcard">
+                            <header class="rcard__top">
+                                <span>Result · ID 2309</span>
+                                <span class="rcard__rating">10<small>/10</small></span>
+                            </header>
+                            <div class="rcard__imgs">
+                                <figure><img src="assets/stovecam-2309-rgb.jpg" alt="French toast in a skillet" loading="lazy"><figcaption><span class="ptag">RGB</span></figcaption></figure>
+                                <figure><img src="assets/stovecam-2309-ir.jpg" alt="Thermal of the hot skillet" loading="lazy"><figcaption><span class="ptag ptag--ir">Thermal</span></figcaption></figure>
                             </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/QD.jpeg" alt="SEM Microscopy" loading="lazy">
-                            <div class="caption">
-                                <strong>SEM Imaging:</strong> Characterizing gold nanoparticle distribution.
+                            <dl class="rcard__out">
+                                <div><dt>Food</dt><dd>French toast</dd></div>
+                                <div><dt>Method</dt><dd>Pan-fry</dd></div>
+                                <div><dt>Cookware</dt><dd>Skillet</dd></div>
+                                <div><dt>Burner</dt><dd>Front right</dd></div>
+                                <div><dt>Confidence</dt><dd>1.00</dd></div>
+                            </dl>
+                            <p class="rcard__note">“French toast is actively cooking in a skillet on the front right burner. The thermal image confirms high heat under the pan, with cooler spots where the bread absorbs the heat.”</p>
+                        </article>
+
+                        <article class="rcard">
+                            <header class="rcard__top">
+                                <span>Result · ID 2385</span>
+                                <span class="rcard__rating">10<small>/10</small></span>
+                            </header>
+                            <div class="rcard__imgs">
+                                <figure><img src="assets/stovecam-2385-rgb.jpg" alt="A lid being lifted off a pot of chicken" loading="lazy"><figcaption><span class="ptag">RGB</span></figcaption></figure>
+                                <figure><img src="assets/stovecam-2385-ir.jpg" alt="Thermal showing active and residual heat" loading="lazy"><figcaption><span class="ptag ptag--ir">Thermal</span></figcaption></figure>
                             </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/SEM.jpeg" alt="Wafer Processing" loading="lazy">
-                            <div class="caption">
-                                <strong>Lithography:</strong> Silicon wafer processing and etching.
-                            </div>
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="assets/spincast.jpeg" alt="Wafer Processing" loading="lazy">
-                            <div class="caption">
-                                <strong>Spin Casting:</strong> Applying photoresist to silicon wafers.
-                            </div>
-                        </div>
+                            <dl class="rcard__out">
+                                <div><dt>Food</dt><dd>Chicken</dd></div>
+                                <div><dt>Method</dt><dd>Boil</dd></div>
+                                <div><dt>Cookware</dt><dd>Pot</dd></div>
+                                <div><dt>Burner</dt><dd>Right</dd></div>
+                                <div><dt>Confidence</dt><dd>0.95</dd></div>
+                            </dl>
+                            <p class="rcard__note">“A person is handling the lid of a large pot on the right burner. Raw chicken is visible inside. The thermal image confirms a strong, ring-shaped active heat signature under this pot. The left burner shows residual heat but is empty in the RGB image, so it is excluded.”</p>
+                        </article>
                     </div>
-                    
-                    <button class="carousel-btn prev-btn" aria-label="Previous image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                    </button>
-                    <button class="carousel-btn next-btn" aria-label="Next image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </button>
-                    <div class="carousel-indicators"></div>
+                    <p class="aside">
+                        The second one is the interesting case. There's motion blur, a hand in the shot,
+                        and a covered pot — but the model still puts the two photos together, using the
+                        normal photo to <em>rule out</em> the leftover heat the thermal camera picks up on
+                        the empty left burner.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 07 applications -->
+            <div class="block" data-reveal>
+                <div class="block__no">07</div>
+                <div class="block__body">
+                    <h3 class="block__h">Where it goes</h3>
+                    <p>
+                        The main point of the project is the method — building cheap sensors from this
+                        kind of paired data for air-quality and building research. But once you have a
+                        record of what's being cooked, it's useful for a lot of other things too:
+                    </p>
+                    <div class="apps">
+                        <div class="app"><div class="app__h"><span>01</span>Exposure science</div><p class="app__p">Quantify cooking frequency, duration, and method to model indoor pollutant emissions without intrusive lab gear.</p></div>
+                        <div class="app"><div class="app__h"><span>02</span>Elderly care</div><p class="app__p">A daily heartbeat summary — "Mom used the stove for 20 minutes this morning; it's now off."</p></div>
+                        <div class="app"><div class="app__h"><span>03</span>Compliance</div><p class="app__p">Left in a commercial kitchen, it can help verify food is cooked to adequate temperatures.</p></div>
+                        <div class="app"><div class="app__h"><span>04</span>Energy</div><p class="app__p">Compare ambient heat wasted by gas vs. electric stoves using the thermal channel.</p></div>
+                        <div class="app"><div class="app__h"><span>05</span>Macros</div><p class="app__p">A heat-aware alternative to photo-only calorie apps, using the cooking process as signal.</p></div>
+                        <div class="app"><div class="app__h"><span>06</span>Economics</div><p class="app__p">Cooking habits — the ratio of meat to vegetables, when households cook — as a ground-level indicator.</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 08 status -->
+            <div class="block" data-reveal>
+                <div class="block__no">08</div>
+                <div class="block__body">
+                    <h3 class="block__h">Status &amp; publications</h3>
+                    <div class="status">
+                        <div class="status__row"><span class="status__k">Target venue</span><span class="status__v"><strong>ISES 2026</strong> — Int'l Society of Exposure Science (Vancouver), abstract due Apr 30 2026</span></div>
+                        <div class="status__row"><span class="status__k">Also exploring</span><span class="status__v">Healthy Buildings 2027 (Amsterdam)</span></div>
+                        <div class="status__row"><span class="status__k">Team</span><span class="status__v"><strong>Jonathan Earp</strong> &amp; Noah Sohn — advised by David Lorenzetti &amp; Michael Sohn (LBNL)</span></div>
+                        <div class="status__row"><span class="status__k">Built on</span><span class="status__v">Raspberry Pi 5 · Adafruit thermal camera · LBNL CBorg · Gemini vision</span></div>
+                        <div class="status__row"><span class="status__k">In progress</span><span class="status__v">Sessionization — feeding prior frames as context so the model can track a dish over time</span></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div class="divider fade-in"></div>
-
-        <section class="project-item fade-in">
-            <div class="project-info">
-                <div class="project-meta">
-                    <span class="year">2023</span>
-                    <span class="location">LBNL</span>
-                </div>
-                <h2 class="project-title">Indoor Air Quality Sensing</h2>
-                <div class="tags">
-                    <span>Environmental Eng.</span>
-                    <span>Data Analysis</span>
-                    <span>Python</span>
-                </div>
-                <p class="description">
-                    Conducted field research at Lawrence Berkeley National Labs to evaluate low-cost sensor performance in residential environments to improve ventilation strategies.
-                </p>
-                <ul class="details-list">
-                    <li>Engineered a portable data logging system using microcontrollers.</li>
-                    <li>Wrote Python scripts to process large datasets and identify sensor drift.</li>
-                    <li>Presented statistical findings on pollutant accumulation dynamics.</li>
-                </ul>
+        <!-- ARCHIVE -->
+        <section class="feature wrap" id="archive">
+            <div class="shead" data-reveal>
+                <span class="shead__no">02</span>
+                <span class="shead__title">Archive</span>
+                <span class="shead__meta">Earlier research</span>
             </div>
 
-            <div class="carousel-wrapper">
-                <div class="carousel-container" id="carousel-lbnl">
-                    <div class="carousel-track">
-                        <div class="carousel-slide">
-                            <img src="assets\IMG_1509.jpeg" alt="Sensor Prototype" loading="lazy">
-                            <div class="caption">
-                                <strong>Sensor Prototype:</strong> Custom microcontroller setup.
-                            </div>
+            <article class="project" data-reveal>
+                <div class="project__info">
+                    <div class="project__meta"><span class="yr">2024</span><span>UPenn ESAP</span></div>
+                    <h3 class="project__title">Nanotechnology &amp; Device Fabrication</h3>
+                    <div class="tags"><span>Nanoscience</span><span>Cleanroom ISO-5</span><span>Lithography</span></div>
+                    <p class="project__desc">
+                        An intensive fellowship on the fabrication and characterization of nanoscale
+                        devices — processing silicon wafers in a Class 100 cleanroom with advanced
+                        lithography.
+                    </p>
+                    <ul class="dlist">
+                        <li>Synthesized gold nanoparticles and analyzed optical properties via spectroscopy.</li>
+                        <li>Used Scanning Electron Microscopy (SEM) and Atomic Force Microscopy (AFM).</li>
+                        <li>Developed protocols for thin-film deposition at the atomic level.</li>
+                    </ul>
+                </div>
+
+                <div class="carousel" id="carousel-nano">
+                    <div class="carousel__track">
+                        <div class="carousel__slide">
+                            <img src="assets/microfluid.jpeg" alt="Cleanroom gowning" loading="lazy">
+                            <div class="carousel__cap"><strong>Cleanroom protocol</strong> — preparing for ISO-5 entry.</div>
                         </div>
-                        <div class="carousel-slide">
-                            <img src="assets\IMG_1643.jpeg" alt="Data Analysis" loading="lazy">
-                            <div class="caption">
-                                <strong>Data Viz:</strong> Correlation matrix of pollutants.
-                            </div>
+                        <div class="carousel__slide">
+                            <img src="assets/QD.jpeg" alt="SEM microscopy" loading="lazy">
+                            <div class="carousel__cap"><strong>SEM imaging</strong> — characterizing gold nanoparticle distribution.</div>
                         </div>
-                        <div class="carousel-slide">
-                            <img src="assets\unnamed.jpg" alt="Data Analysis" loading="lazy">
-                            <div class="caption">
-                                <strong>Data Viz:</strong> Correlation matrix of pollutants.
-                            </div>
+                        <div class="carousel__slide">
+                            <img src="assets/SEM.jpeg" alt="Wafer processing" loading="lazy">
+                            <div class="carousel__cap"><strong>Lithography</strong> — silicon wafer processing and etching.</div>
+                        </div>
+                        <div class="carousel__slide">
+                            <img src="assets/spincast.jpeg" alt="Spin casting" loading="lazy">
+                            <div class="carousel__cap"><strong>Spin casting</strong> — applying photoresist to silicon wafers.</div>
                         </div>
                     </div>
-
-                    <button class="carousel-btn prev-btn" aria-label="Previous image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                    </button>
-                    <button class="carousel-btn next-btn" aria-label="Next image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </button>
-                    <div class="carousel-indicators"></div>
+                    <button class="carousel__btn prev" aria-label="Previous">‹</button>
+                    <button class="carousel__btn next" aria-label="Next">›</button>
+                    <div class="carousel__dots"></div>
                 </div>
-            </div>
+            </article>
         </section>
-
-        <div class="divider fade-in"></div>
 
     </main>
 
-    <footer class="site-footer fade-in">
-        <p>&copy; 2025 Jonathan Earp</p>
+    <footer class="foot">
+        <div class="wrap">
+            <div class="foot__grid">
+                <div class="foot__col"><div class="foot__big">Measure<br>the world.</div></div>
+                <div class="foot__col">
+                    <h4>Index</h4>
+                    <ul>
+                        <li><a href="https://jonathanearp.xyz">Home ↗</a></li>
+                        <li><a href="https://fpv.jonathanearp.xyz">FPV ↗</a></li>
+                        <li><a href="https://resume.jonathanearp.xyz">Résumé ↗</a></li>
+                    </ul>
+                </div>
+                <div class="foot__col">
+                    <h4>Elsewhere</h4>
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/jonathan-earp-25905026b/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+                        <li><a href="mailto:jonathan.earp55@gmail.com">Email ↗</a></li>
+                    </ul>
+                </div>
+                <a href="#top" class="to-top">↑ Top</a>
+            </div>
+            <div class="foot__bar">
+                <span>© <span id="year">2026</span> Jonathan Earp</span>
+                <span>Research · Sensing · AI</span>
+            </div>
+        </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="topo.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
