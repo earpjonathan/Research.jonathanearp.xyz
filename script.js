@@ -62,6 +62,36 @@
   onScroll();
 })();
 
+/* ---- chapter nav: highlight the chapter you're reading ---- */
+(function () {
+  var nav = document.getElementById("chapnav");
+  if (!nav) return;
+  var links = Array.prototype.slice.call(nav.querySelectorAll("a"));
+  var targets = links.map(function (l) {
+    return { link: l, el: document.getElementById(l.getAttribute("href").slice(1)) };
+  }).filter(function (t) { return t.el; });
+  if (!targets.length) return;
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    /* active = the last chapter whose top has passed 45% of the viewport */
+    var line = window.innerHeight * 0.45;
+    var current = targets[0];
+    targets.forEach(function (t) {
+      if (t.el.getBoundingClientRect().top <= line) current = t;
+    });
+    targets.forEach(function (t) {
+      t.link.classList.toggle("is-active", t === current);
+    });
+  }
+  window.addEventListener("scroll", function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+})();
+
 /* ---- carousels ---- */
 (function () {
   document.querySelectorAll(".carousel").forEach(function (carousel) {

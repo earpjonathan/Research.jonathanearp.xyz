@@ -117,8 +117,36 @@
                 </div>
             </div>
 
+            <!-- tl;dr -->
+            <div class="tldr" data-reveal>
+                <div>
+                    <span class="tldr__k">What it is</span>
+                    <p>A Raspberry Pi above the stove with two cameras — one normal, one thermal — photographing the cooktop every minute.</p>
+                </div>
+                <div>
+                    <span class="tldr__k">How it works</span>
+                    <p>Three AI stages: throw away dark frames for free, screen for cooking cheaply, then have a top model write down food, method, burner, and cookware.</p>
+                </div>
+                <div>
+                    <span class="tldr__k">Why it matters</span>
+                    <p>Cooking is one of the biggest indoor air pollutants, and this record is what exposure researchers need — at sensor prices, not lab prices.</p>
+                </div>
+            </div>
+
+            <!-- chapter nav -->
+            <nav class="chapnav" id="chapnav" aria-label="StoveCam chapters">
+                <a href="#c-problem"><span>01</span>Problem</a>
+                <a href="#c-sensor"><span>02</span>Sensor</a>
+                <a href="#c-pipeline"><span>03</span>Pipeline</a>
+                <a href="#c-examples"><span>04</span>Examples</a>
+                <a href="#c-validation"><span>05</span>Validation</a>
+                <a href="#c-how"><span>06</span>How it works</a>
+                <a href="#c-uses"><span>07</span>Uses</a>
+                <a href="#c-status"><span>08</span>Status</a>
+            </nav>
+
             <!-- 01 problem -->
-            <div class="block" data-reveal>
+            <div class="block" data-reveal id="c-problem">
                 <div class="block__no">01</div>
                 <div class="block__body">
                     <h3 class="block__h">The problem</h3>
@@ -136,7 +164,7 @@
             </div>
 
             <!-- 02 sensor -->
-            <div class="block" data-reveal>
+            <div class="block" data-reveal id="c-sensor">
                 <div class="block__no">02</div>
                 <div class="block__body">
                     <h3 class="block__h">The sensor: two cameras, one stove</h3>
@@ -167,7 +195,7 @@
             </div>
 
             <!-- 03 pipeline -->
-            <div class="block" data-reveal>
+            <div class="block" data-reveal id="c-pipeline">
                 <div class="block__no">03</div>
                 <div class="block__body">
                     <h3 class="block__h">A three-stage pipeline</h3>
@@ -204,55 +232,9 @@
                 </div>
             </div>
 
-            <!-- 04 how -->
-            <div class="block" data-reveal>
+            <!-- 04 worked examples -->
+            <div class="block" data-reveal id="c-examples">
                 <div class="block__no">04</div>
-                <div class="block__body">
-                    <h3 class="block__h">Why a vision model can read a stove</h3>
-                    <p>
-                        The model doesn't really "see" the way we do. It shrinks each photo, cuts it into
-                        small patches, and turns every patch into a list of numbers. Those numbers sit in
-                        the <em>same</em> space as words, so a round metal shape with a handle ends up
-                        near "skillet," and a bright ring in the thermal photo ends up near "hot burner."
-                        Because it was trained on huge piles of labelled food photos, overhead cooking
-                        clips <em>and</em> thermal images, it can even read the little temperature numbers
-                        printed on the IR frame.
-                    </p>
-                    <div class="callout">
-                        <strong>Where it falls down.</strong> The model is matching patterns, not
-                        understanding physics, so a strange scene it hasn't seen before can fool it. It's
-                        also biased toward Western food: it nails a plate of salmon or French toast where
-                        everything sits separately, but a wok full of mixed, blurry stir-fry is much
-                        harder. It gets chicken right nearly every time; jackfruit, almost never. Writing
-                        down <em>where</em> and <em>why</em> it fails is a real part of the project, not a
-                        footnote.
-                    </div>
-                </div>
-            </div>
-
-            <!-- 05 validation -->
-            <div class="block" data-reveal>
-                <div class="block__no">05</div>
-                <div class="block__body">
-                    <h3 class="block__h">Checking the AI against people</h3>
-                    <p>
-                        To see whether the labels were any good, we went through <strong>506</strong>
-                        random photo pairs by hand, scored each out of 10, and noted what kind of mistakes
-                        turned up. The model averaged <strong>8.1/10</strong>, with <strong>66%</strong>
-                        scoring 8 or higher and <strong>32%</strong> we couldn't fault. When it does get
-                        it wrong, it usually thinks cooking is happening when it's really just leftover
-                        heat — and for an air-quality study, that's the safer way to be wrong.
-                    </p>
-                    <figure class="result">
-                        <img src="assets/stovecam-results.png" alt="Six-panel chart of StoveCam grading results across 506 graded pairs" loading="lazy">
-                        <figcaption>Grading dashboard across 506 human-scored pairs — rating distribution, error-flag frequency, model self-confidence vs. human score, and accuracy by cooking type and food.</figcaption>
-                    </figure>
-                </div>
-            </div>
-
-            <!-- 06 worked examples -->
-            <div class="block" data-reveal>
-                <div class="block__no">06</div>
                 <div class="block__body">
                     <h3 class="block__h">Worked examples</h3>
                     <p>
@@ -309,8 +291,67 @@
                 </div>
             </div>
 
+            <!-- 05 validation -->
+            <div class="block" data-reveal id="c-validation">
+                <div class="block__no">05</div>
+                <div class="block__body">
+                    <h3 class="block__h">Checking the AI against people</h3>
+                    <p>
+                        To see whether the labels were any good, we went through <strong>506</strong>
+                        random photo pairs by hand, scored each out of 10, and noted what kind of mistakes
+                        turned up. The model averaged <strong>8.1/10</strong>, with <strong>66%</strong>
+                        scoring 8 or higher and <strong>32%</strong> we couldn't fault. When it does get
+                        it wrong, it usually thinks cooking is happening when it's really just leftover
+                        heat — and for an air-quality study, that's the safer way to be wrong.
+                    </p>
+                    <figure class="fig">
+                        <img class="fig--dark" src="assets/fig-rating-dark.svg" alt="Bar chart of 506 human grades: most captures score 9 or 10, mean 8.1, with a secondary cluster at 5" loading="lazy">
+                        <img class="fig--light" src="assets/fig-rating-light.svg" alt="" aria-hidden="true" loading="lazy">
+                        <figcaption>How the 506 hand-graded captures scored. The cluster at 5 is almost entirely false positives — 122 of those 125 are residual-heat calls.</figcaption>
+                    </figure>
+
+                    <figure class="fig">
+                        <img class="fig--dark" src="assets/fig-errors-dark.svg" alt="Bar chart of error types: false positives 24.3%, mislabeled food 11.1%, missed detections 3.8%, wrong burner and wrong cooking type both zero" loading="lazy">
+                        <img class="fig--light" src="assets/fig-errors-light.svg" alt="" aria-hidden="true" loading="lazy">
+                        <figcaption>What kind of mistakes it makes. False positives lead — and across all 506 pairs it never once got the burner or the cooking method wrong.</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- 06 how it works -->
+            <div class="block" data-reveal id="c-how">
+                <div class="block__no">06</div>
+                <div class="block__body">
+                    <h3 class="block__h">How it reads a stove — and where it breaks</h3>
+                    <p>
+                        The model doesn't really "see" the way we do. It shrinks each photo, cuts it into
+                        small patches, and turns every patch into a list of numbers. Those numbers sit in
+                        the <em>same</em> space as words, so a round metal shape with a handle ends up
+                        near "skillet," and a bright ring in the thermal photo ends up near "hot burner."
+                        Because it was trained on huge piles of labelled food photos, overhead cooking
+                        clips <em>and</em> thermal images, it can even read the little temperature numbers
+                        printed on the IR frame.
+                    </p>
+                    <div class="callout">
+                        <strong>Where it falls down.</strong> The model is matching patterns, not
+                        understanding physics, so a strange scene it hasn't seen before can fool it. It's
+                        also biased toward Western food: it nails a plate of salmon or French toast where
+                        everything sits separately, but a wok full of mixed, blurry stir-fry is much
+                        harder. It gets chicken right nearly every time; jackfruit, almost never. Writing
+                        down <em>where</em> and <em>why</em> it fails is a real part of the project, not a
+                        footnote.
+                    </div>
+
+                    <figure class="fig">
+                        <img class="fig--dark" src="assets/fig-food-dark.svg" alt="Bar chart of mean grade by food: clearly visible dishes like salmon and french toast score 10, while unknown and covered pots score lowest" loading="lazy">
+                        <img class="fig--light" src="assets/fig-food-light.svg" alt="" aria-hidden="true" loading="lazy">
+                        <figcaption>Mean grade by food (foods with four or more graded captures). Dishes the camera can actually see score perfect; the muted bars — covered pots and unknowns — sit at the bottom.</figcaption>
+                    </figure>
+                </div>
+            </div>
+
             <!-- 07 applications -->
-            <div class="block" data-reveal>
+            <div class="block" data-reveal id="c-uses">
                 <div class="block__no">07</div>
                 <div class="block__body">
                     <h3 class="block__h">Where it goes</h3>
@@ -331,7 +372,7 @@
             </div>
 
             <!-- 08 status -->
-            <div class="block" data-reveal>
+            <div class="block" data-reveal id="c-status">
                 <div class="block__no">08</div>
                 <div class="block__body">
                     <h3 class="block__h">Status &amp; publications</h3>

@@ -235,10 +235,60 @@ main { padding-top: 0; }
 .stat__n small { font-size: var(--t-sub); color: var(--fg-soft); }
 .stat__l { font-size: var(--t-caption); text-transform: uppercase; color: var(--fg-soft); margin-top: 10px; line-height: 1.4; }
 
+/* tl;dr strip — what / how / why at a glance */
+.tldr {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line);
+  margin-top: 41px;
+}
+.tldr > div { padding: 24px 18px 24px 0; }
+.tldr > div + div { border-left: 1px dashed var(--line); padding-left: 18px; }
+.tldr__k {
+  display: block; font-size: var(--t-caption); text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px;
+}
+.tldr p { font-size: var(--t-body); color: var(--fg); line-height: 1.5; }
+
+/* sticky chapter nav for the StoveCam story */
+.chapnav {
+  position: sticky; top: var(--header-h); z-index: 90;
+  display: flex; gap: clamp(14px, 2.5vw, 28px);
+  background: var(--bg);
+  border-bottom: 1px dashed var(--line);
+  padding: 14px 0;
+  margin-top: 41px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  transition: background 0.4s var(--ease);
+}
+.chapnav::-webkit-scrollbar { display: none; }
+.chapnav a {
+  display: inline-flex; align-items: baseline; gap: 6px;
+  font-size: var(--t-caption); text-transform: uppercase;
+  color: var(--fg-soft); white-space: nowrap;
+  transition: color var(--t-fast);
+}
+.chapnav a span { color: var(--fg-soft); transition: color var(--t-fast); }
+.chapnav a:hover { color: var(--fg); }
+.chapnav a.is-active { color: var(--fg); }
+.chapnav a.is-active span { color: var(--accent); }
+
+/* themed figures (SVG charts regenerated from grades.csv) */
+.fig { margin: 24px 0 0; }
+.fig + .fig { margin-top: 31px; }
+.fig img { width: 100%; height: auto; display: block; }
+.fig figcaption {
+  padding-top: 10px; font-size: var(--t-caption); text-transform: uppercase;
+  color: var(--fg-soft); line-height: 1.5; max-width: 72ch;
+}
+html[data-theme="dark"] .fig--light { display: none; }
+html[data-theme="light"] .fig--dark { display: none; }
+
 /* content block */
 .block {
   display: grid; grid-template-columns: 68px 1fr; gap: 24px;
   padding: 41px 0; border-top: 1px dashed var(--line);
+  scroll-margin-top: calc(var(--header-h) + 52px);
 }
 .block__no { font-size: var(--t-caption); color: var(--accent); }
 .block__body { max-width: 74ch; }
@@ -371,6 +421,9 @@ main { padding-top: 0; }
   .topnav__link--hide { display: none; }
   .block { grid-template-columns: 1fr; gap: 8px; }
   .pair { grid-template-columns: 1fr; }
+  .tldr { grid-template-columns: 1fr; }
+  .tldr > div { padding: 18px 0; }
+  .tldr > div + div { border-left: 0; border-top: 1px dashed var(--line); padding-left: 0; }
   .rcard__imgs { grid-template-columns: 1fr; }
   .rcard__out { grid-template-columns: 1fr 1fr; }
   .rcard__out > div:nth-child(odd) { border-left: 0; padding-left: 0; }
