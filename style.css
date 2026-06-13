@@ -291,7 +291,10 @@ html[data-theme="light"] .fig--dark { display: none; }
   scroll-margin-top: calc(var(--header-h) + 52px);
 }
 .block__no { font-size: var(--t-caption); color: var(--accent); }
-.block__body { max-width: 74ch; }
+/* prose stays at a readable measure; visual elements (figures, image pairs,
+   pipeline, result cards, app grid, status table) break out to full width */
+.block__body { max-width: none; }
+.block__body > p, .callout { max-width: 74ch; }
 .block__h { font-size: var(--t-h); line-height: 1.09; font-weight: 500; margin-bottom: 18px; text-transform: uppercase; }
 .block__body p { font-size: var(--t-body); color: var(--fg); line-height: 1.5; margin-bottom: 14px; }
 .block__body p strong { font-weight: 500; }
