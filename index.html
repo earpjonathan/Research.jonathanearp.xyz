@@ -83,8 +83,8 @@
             </div>
             <h1 class="hero__title" data-reveal style="--i:1">Research</h1>
             <p class="hero__lead" data-reveal style="--i:2">
-                I build <b>low-cost sensors</b> that turn everyday signals into usable data,
-                and test them to find out where they get it wrong.
+                Most of this is one project: a <b>cheap camera</b> over a stove that works out
+                what's cooking, and a lot of checking where it gets that wrong.
             </p>
 
             <div class="metastrip" data-reveal style="--i:3">
@@ -122,8 +122,8 @@
                 <p class="feature__sub">
                     A small camera that watches the stove and works out <em>when</em> someone's
                     cooking, <em>what</em> is in the pan, and <em>how</em> it's being cooked. That
-                    record is exactly what air-quality researchers need, and it costs a tiny
-                    fraction of what proper lab instruments do.
+                    record is what air-quality researchers need, and the parts cost a fraction
+                    of what lab instruments do.
                 </p>
             </div>
 
@@ -143,7 +143,7 @@
                 </div>
                 <div class="stat">
                     <div class="stat__n">3<small>-stage</small></div>
-                    <div class="stat__l">Pipeline that spends<br>AI where it counts</div>
+                    <div class="stat__l">Pipeline, cheapest<br>check first</div>
                 </div>
             </div>
 
@@ -151,7 +151,7 @@
             <div class="tldr" data-reveal>
                 <div>
                     <span class="tldr__k">What it is</span>
-                    <p>A Raspberry Pi above the stove with two cameras — one normal, one thermal — photographing the cooktop every minute.</p>
+                    <p>A Raspberry Pi above the stove with two cameras, one normal and one thermal. It photographs the cooktop every minute.</p>
                 </div>
                 <div>
                     <span class="tldr__k">How it works</span>
@@ -159,7 +159,7 @@
                 </div>
                 <div>
                     <span class="tldr__k">Why it matters</span>
-                    <p>Cooking is one of the biggest indoor air pollutants, and this record is what exposure researchers need — at sensor prices, not lab prices.</p>
+                    <p>Cooking is one of the biggest indoor air pollutants. Exposure researchers need a record of it, and lab-grade gear costs too much to put in many homes.</p>
                 </div>
             </div>
 
@@ -203,23 +203,23 @@
                         cameras: a normal <strong>RGB camera</strong> and an <strong>Adafruit thermal
                         camera</strong>. Every 60 seconds it takes a picture with both and saves the
                         pair. The two cameras are doing different jobs on purpose. The normal photo shows
-                        what's on the stove. The thermal photo shows what the normal one can't — heat
-                        under a lid, a pan that's been left on, and the actual temperatures.
+                        what's on the stove. The thermal photo shows what the normal one can't:
+                        heat under a lid, a pan that's been left on, and the actual temperatures.
                     </p>
                     <div class="pair">
                         <figure>
                             <img src="assets/stovecam-2309-rgb.jpg" alt="RGB capture: French toast cooking in a skillet" loading="lazy">
-                            <figcaption><span class="ptag">RGB</span> French toast cooking in a stainless skillet — the model reads the cookware, the food, and the front-right burner.</figcaption>
+                            <figcaption><span class="ptag">RGB</span> French toast cooking in a stainless skillet. The model reads the cookware, the food and the front-right burner.</figcaption>
                         </figure>
                         <figure>
                             <img src="assets/stovecam-2309-ir.jpg" alt="Thermal capture: hot pan with cooler toast" loading="lazy">
-                            <figcaption><span class="ptag ptag--ir">Thermal</span> The same instant in IR — the pan core reads 113.9&deg;C while the toast stays cooler where it absorbs heat.</figcaption>
+                            <figcaption><span class="ptag ptag--ir">Thermal</span> The same instant in IR. The pan core reads 113.9&deg;C while the toast stays cooler where it absorbs heat.</figcaption>
                         </figure>
                     </div>
                     <p class="aside">
                         The most common thing the model saw across the whole dataset was a covered pot.
-                        Those are exactly the moments the thermal camera pulls its weight: you can't see
-                        the food, but you can still see the heat.
+                        That's the case the thermal camera is there for. The food is hidden and the heat
+                        isn't.
                     </p>
                 </div>
             </div>
@@ -238,7 +238,7 @@
                         <div class="stage">
                             <div class="stage__n">Stage 1</div>
                             <div class="stage__h">Brightness gate</div>
-                            <p class="stage__p">A quick check on the device itself throws out dark photos — lights off, nobody home — before any AI runs. This alone drops most of the captures.</p>
+                            <p class="stage__p">A quick check on the device itself throws out dark photos (lights off, nobody home) before any AI runs. This alone drops most of the captures.</p>
                             <div class="stage__cost">$0 · on-device</div>
                         </div>
                         <div class="stage">
@@ -290,7 +290,7 @@
                                 <div><dt>Burner</dt><dd>Front right</dd></div>
                                 <div><dt>Confidence</dt><dd>1.00</dd></div>
                             </dl>
-                            <p class="rcard__note">“French toast is actively cooking in a skillet on the front right burner. The thermal image confirms high heat under the pan, with cooler spots where the bread absorbs the heat.”</p>
+                            <p class="rcard__note">"French toast is actively cooking in a skillet on the front right burner. The thermal image confirms high heat under the pan, with cooler spots where the bread absorbs the heat."</p>
                         </article>
 
                         <article class="rcard">
@@ -309,12 +309,12 @@
                                 <div><dt>Burner</dt><dd>Right</dd></div>
                                 <div><dt>Confidence</dt><dd>0.95</dd></div>
                             </dl>
-                            <p class="rcard__note">“A person is handling the lid of a large pot on the right burner. Raw chicken is visible inside. The thermal image confirms a strong, ring-shaped active heat signature under this pot. The left burner shows residual heat but is empty in the RGB image, so it is excluded.”</p>
+                            <p class="rcard__note">"A person is handling the lid of a large pot on the right burner. Raw chicken is visible inside. The thermal image confirms a strong, ring-shaped active heat signature under this pot. The left burner shows residual heat but is empty in the RGB image, so it is excluded."</p>
                         </article>
                     </div>
                     <p class="aside">
                         The second one is the interesting case. There's motion blur, a hand in the shot,
-                        and a covered pot — but the model still puts the two photos together, using the
+                        and a covered pot, but the model still puts the two photos together, using the
                         normal photo to <em>rule out</em> the leftover heat the thermal camera picks up on
                         the empty left burner.
                     </p>
@@ -332,13 +332,13 @@
                         turned up. The model averaged <strong>8.1/10</strong>, with <strong>66%</strong>
                         scoring 8 or higher and <strong>32%</strong> we couldn't fault. When it does get
                         it wrong, it usually thinks cooking is happening when it's really just leftover
-                        heat — and for an air-quality study, that's the safer way to be wrong. And in
+                        heat, and for an air-quality study that's the safer way to be wrong. And in
                         all 506 pairs, it never once mixed up the burner or the cooking method.
                     </p>
                     <figure class="fig">
                         <img class="fig--dark" src="assets/fig-rating-dark.svg" alt="Bar chart of 506 human grades: most captures score 9 or 10, mean 8.1, with a secondary cluster at 5" loading="lazy">
                         <img class="fig--light" src="assets/fig-rating-light.svg" alt="" aria-hidden="true" loading="lazy">
-                        <figcaption>How the 506 hand-graded captures scored. The cluster at 5 is almost entirely false positives — 122 of those 125 are residual-heat calls.</figcaption>
+                        <figcaption>How the 506 hand-graded captures scored. The cluster at 5 is almost entirely false positives: 122 of those 125 are residual-heat calls.</figcaption>
                     </figure>
                 </div>
             </div>
@@ -362,15 +362,13 @@
                         understanding physics, so a strange scene it hasn't seen before can fool it. It's
                         also biased toward Western food: it nails a plate of salmon or French toast where
                         everything sits separately, but a wok full of mixed, blurry stir-fry is much
-                        harder. It gets chicken right nearly every time; jackfruit, almost never. Writing
-                        down <em>where</em> and <em>why</em> it fails is a real part of the project, not a
-                        footnote.
+                        harder. It gets chicken right nearly every time; jackfruit, almost never.
                     </div>
 
                     <figure class="fig">
                         <img class="fig--dark" src="assets/fig-food-dark.svg" alt="Bar chart of mean grade by food: clearly visible dishes like salmon and french toast score 10, while unknown and covered pots score lowest" loading="lazy">
                         <img class="fig--light" src="assets/fig-food-light.svg" alt="" aria-hidden="true" loading="lazy">
-                        <figcaption>Mean grade by food (foods with four or more graded captures). Dishes the camera can actually see score perfect; the muted bars — covered pots and unknowns — sit at the bottom.</figcaption>
+                        <figcaption>Mean grade by food (foods with four or more graded captures). Dishes the camera can actually see score perfect; the muted bars (covered pots and unknowns) sit at the bottom.</figcaption>
                     </figure>
                 </div>
             </div>
@@ -381,17 +379,17 @@
                 <div class="block__body">
                     <h3 class="block__h">Where it goes</h3>
                     <p>
-                        The main point of the project is the method — building cheap sensors from this
-                        kind of paired data for air-quality and building research. But once you have a
-                        record of what's being cooked, it's useful for a lot of other things too:
+                        The point of the project is the method: building cheap sensors out of paired
+                        image and sensor data, for air-quality and building research. Once you have a
+                        record of what's being cooked, though, it's useful for other things too:
                     </p>
                     <div class="apps">
                         <div class="app"><div class="app__h"><span>01</span>Exposure science</div><p class="app__p">Quantify cooking frequency, duration, and method to model indoor pollutant emissions without intrusive lab gear.</p></div>
-                        <div class="app"><div class="app__h"><span>02</span>Elderly care</div><p class="app__p">A daily heartbeat summary — "Mom used the stove for 20 minutes this morning; it's now off."</p></div>
+                        <div class="app"><div class="app__h"><span>02</span>Elderly care</div><p class="app__p">A daily heartbeat summary: "Mom used the stove for 20 minutes this morning; it's now off."</p></div>
                         <div class="app"><div class="app__h"><span>03</span>Compliance</div><p class="app__p">Left in a commercial kitchen, it can help verify food is cooked to adequate temperatures.</p></div>
                         <div class="app"><div class="app__h"><span>04</span>Energy</div><p class="app__p">Compare ambient heat wasted by gas vs. electric stoves using the thermal channel.</p></div>
-                        <div class="app"><div class="app__h"><span>05</span>Macros</div><p class="app__p">A heat-aware alternative to photo-only calorie apps, using the cooking process as signal.</p></div>
-                        <div class="app"><div class="app__h"><span>06</span>Economics</div><p class="app__p">Cooking habits — the ratio of meat to vegetables, when households cook — as a ground-level indicator.</p></div>
+                        <div class="app"><div class="app__h"><span>05</span>Macros</div><p class="app__p">A heat-aware alternative to photo-only calorie apps, since the cooking itself is signal.</p></div>
+                        <div class="app"><div class="app__h"><span>06</span>Economics</div><p class="app__p">Cooking habits as a ground-level indicator: the ratio of meat to vegetables, and when households cook.</p></div>
                     </div>
                 </div>
             </div>
@@ -427,14 +425,14 @@
                     <div class="tags"><span>Nanofabrication</span><span>Cleanroom ISO-5</span><span>Photolithography</span><span>Microfluidics</span><span>Quantum dots</span><span>SEM / AFM</span></div>
                     <p class="project__desc">
                         Three weeks at Penn's Singh Center for Nanotechnology, working in the Class
-                        100 (ISO-5) cleanroom. The course runs the whole fabrication loop rather
-                        than one technique: pattern a wafer, build something on it, then measure
-                        whether what came out matches what was designed.
+                        100 (ISO-5) cleanroom. The course covers the whole fabrication loop: pattern
+                        a wafer, build something on it, then measure whether what came out matches
+                        the design.
                     </p>
                     <ul class="dlist">
-                        <li>Patterned silicon by photolithography — spin-casting photoresist, exposing through a mask, developing, then etching and depositing thin films.</li>
+                        <li>Patterned silicon by photolithography: spin-cast the photoresist, expose it through a mask, develop it, then etch and deposit thin films.</li>
                         <li>Built microfluidic devices from those patterns and ran dye through the channels under a microscope to see whether the flow behaved.</li>
-                        <li>Synthesized CdSe quantum dots, where emission colour is set by particle size rather than composition — one reaction, stopped at different points, fluoresces from blue through yellow.</li>
+                        <li>Synthesized CdSe quantum dots, where particle size is what sets the emission colour. One reaction, stopped at different points, fluoresces from blue through yellow.</li>
                         <li>Imaged the results on SEM and AFM, since the features sit well below what an optical microscope can resolve.</li>
                         <li>Built an adaptive audio control device with Professor Gyuseok Kim and graduate TAs, from prototype through demo.</li>
                     </ul>
